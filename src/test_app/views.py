@@ -7,13 +7,13 @@ from django.shortcuts import render
 from django.http import HttpResponse, request
 
 #Constants
-ROOT_DIR = "/Users/ivan/PythonProjects/ProjectDjango/test_app"
+ROOT_DIR = "/Users/ivan/PythonProjects/ProjectDjango/src/test_app"
 # Create your views here.
 def hello(request):
     return HttpResponse("Hello")
 
 def gen_password(request):
-    length = request.GET['length']
+    length = request.GET.get('length', '10')
     try:
         val = int(length)
         if (val > 0):
@@ -37,8 +37,8 @@ def get_unique_firstnames(request):
     return HttpResponse(str(records))
 
 def get_filtered_by_state_and_city(request):
-    state = request.GET['state']
-    city = request.GET['city']
+    state = request.GET.get('state', 'AB')
+    city = request.GET.get('city', 'Edmonton')
     query = f'SELECT * FROM customers WHERE State = "{state}" AND City = "{city}"'
     records = execute_query(query)
     return HttpResponse(str(records))

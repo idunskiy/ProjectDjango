@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from test_app.views import hello, gen_password, get_unique_firstnames, get_filtered_by_state_and_city, get_revenue
+from src.test_app.views import hello, gen_password, get_unique_firstnames, get_filtered_by_state_and_city, get_revenue
 
 urlpatterns = [
     path('', admin.site.urls),
