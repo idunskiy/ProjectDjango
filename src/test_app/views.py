@@ -1,13 +1,14 @@
+import json
 import os
 import random
 import sqlite3
 import string
 
-from django.shortcuts import render
 from django.http import HttpResponse, request
+from django.conf import settings
 
 #Constants
-ROOT_DIR = "/Users/ivan/PythonProjects/ProjectDjango/src/test_app"
+ROOT_DIR = settings.BASE_DIR + "/test_app"
 # Create your views here.
 def hello(request):
     return HttpResponse("Hello")
@@ -47,6 +48,16 @@ def get_revenue(request):
     query = 'SELECT SUM(UnitPrice * Quantity) FROM invoice_items'
     records = execute_query(query)
     return HttpResponse(str(records))
+
+def get_invoices(request):
+    query = 'SELECT * FROM invoices'
+    records = execute_query(query)
+    items = []
+    for row in records:
+        items.append({'InvoiceDate': row[2], 'BillingAddress': row[3],
+                      'Total': row[8]})
+    json_records = json.dumps(items)
+    return HttpResponse(str(json_records))
 
 def execute_query(query):
     db_path = os.path.join(ROOT_DIR, 'chinook.db')

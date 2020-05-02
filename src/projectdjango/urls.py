@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from src.test_app.views import hello, gen_password, get_unique_firstnames, get_filtered_by_state_and_city, get_revenue
+from src.test_app.views import hello, gen_password, get_unique_firstnames, get_filtered_by_state_and_city, get_revenue, \
+    get_invoices
 
 urlpatterns = [
     path('', admin.site.urls),
@@ -26,9 +27,7 @@ urlpatterns = [
     path('get-unique-firstnames', get_unique_firstnames),
     path('filter-by-state-and-city', get_filtered_by_state_and_city),
     path('get-revenue', get_revenue),
-
-
-
+    path('get-invoices', get_invoices),
 
 
 ]

@@ -1,0 +1,15 @@
+[
+	{
+		"InvoiceDate": "2010-08-31 00:00:00",
+		"BillingAddress": "Celsiusg. 9",
+		...
+		"Total": 0.99
+	},
+	{
+		"InvoiceDate": "2010-09-13 00:00:00",
+		"BillingAddress": "202 Hoxton Street",
+		...
+		"Total": 1.98
+	}
+	...
+]
