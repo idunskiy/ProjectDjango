@@ -50,12 +50,18 @@ def get_revenue(request):
     return HttpResponse(str(records))
 
 def get_invoices(request):
-    query = 'SELECT * FROM invoices'
+    country = request.GET.get('country')
+    city = request.GET.get('city')
+    if country is not None or city is not None:
+        query = f'SELECT * FROM invoices WHERE BillingCountry = "{country}" COLLATE NOCASE OR ' \
+            f'BillingCity = "{city}" COLLATE NOCASE'
+    else:
+        query = f'SELECT * FROM invoices'
     records = execute_query(query)
     items = []
     for row in records:
         items.append({'InvoiceDate': row[2], 'BillingAddress': row[3],
-                      'Total': row[8]})
+                      'BillingCity': row[4], 'BillingCountry': row[5],'Total': row[8]})
     json_records = json.dumps(items)
     return HttpResponse(str(json_records))
 
